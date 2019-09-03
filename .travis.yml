@@ -1,4 +1,9 @@
 sudo: required
 language: java
+cache:
+  directories:
+    - .autoconf
+    - $HOME/.m2
 before_install: mvn clean
 script: mvn test
+

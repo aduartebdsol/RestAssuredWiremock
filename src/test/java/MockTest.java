@@ -1,6 +1,8 @@
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.jayway.jsonpath.JsonPath;
 import net.minidev.json.JSONArray;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,16 +16,18 @@ public class MockTest {
 
     WireMockServer wireMockServer;
 
-    @BeforeEach
+    @Before
     public void setup () {
         wireMockServer = new WireMockServer(8090);
         wireMockServer.start();
         setupStub();
+        System.out.println("BeforeEach");
     }
 
-    @AfterEach
+    @After
     public void teardown () {
         wireMockServer.stop();
+        System.out.println("After");
     }
 
     public void setupStub() {
@@ -33,6 +37,7 @@ public class MockTest {
                         .withHeader("Content-Type", "text/plain")
                         .withStatus(200)
                         .withBodyFile("json/andyMegaResponse.json")));
+
     }
 
 
@@ -51,7 +56,7 @@ public class MockTest {
 
         System.out.println(pincodes);
 
-//        System.out.println("running");
+        System.out.println("running");
 
     }
 
