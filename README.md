@@ -1,5 +1,5 @@
 # RestAssuredWiremock
-
+[![Build Status](https://travis-ci.org/aduartebdsol/RestAssuredWiremock.svg?branch=master)](https://travis-ci.org/aduartebdsol/RestAssuredWiremock)
 
 Easy to run, just ``mvn test ``
 
