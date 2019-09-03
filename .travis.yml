@@ -1,9 +1,4 @@
 sudo: required
-
-      language: java
-
-      before_install:
-        - mvn clean
-
-      script:
-        - mvn test
+language: java
+before_install: mvn clean
+script: mvn test

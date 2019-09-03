@@ -20,3 +20,6 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'verify'
+
+
+Could not parse aduartebdsol/RestAssuredWiremock/.travis.yml@c2465254cbb9994b
