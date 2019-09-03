@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static io.restassured.RestAssured.given;
 
-public class TestRestAssured {
+public class RestAssuredTest {
 
 
 
