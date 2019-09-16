@@ -12,8 +12,8 @@ cache:
 
 script:
   #  - mvn test
-  - git clone https://aduartebdsol:password@github.com/gss-bds/bds-app.git
-  - git clone https://aduartebdsol:password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
+  - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
+  - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
  # - ls
  # - cd bds-app
  # - git status
