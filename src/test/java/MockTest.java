@@ -21,13 +21,13 @@ public class MockTest {
         wireMockServer = new WireMockServer(8090);
         wireMockServer.start();
         setupStub();
-        System.out.println("BeforeEach");
+
     }
 
     @After
     public void teardown () {
         wireMockServer.stop();
-        System.out.println("After");
+
     }
 
     public void setupStub() {

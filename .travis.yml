@@ -5,5 +5,7 @@ cache:
     - .autoconf
     - $HOME/.m2
 before_install: mvn clean
-script: mvn test
+script:
+  - mvn test
+  - echo hola
 
