@@ -6,6 +6,6 @@ cache:
     - $HOME/.m2
 before_install: mvn clean
 script:
-  - mvn test
+#  - mvn test
   - git clone https://aduartebdsol:Odioamoto1!@github.com/gss-bds/bds-app.git
-
+  - ls
