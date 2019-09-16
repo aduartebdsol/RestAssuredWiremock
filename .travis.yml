@@ -9,3 +9,5 @@ script:
 #  - mvn test
   - git clone https://aduartebdsol:Odioamoto1!@github.com/gss-bds/bds-app.git
   - ls
+  - cd bds-app
+  - git status
