@@ -51,6 +51,7 @@ before_install:
   - adb shell input keyevent 82 &
   - adb devices
   # Download apk to tmpApp
+  - mkdir tmpApp
   - cd tmpApp
   - wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1Yih6vrR84HrMDlo5YHOw68Xu7P2411YG' -O app-release2.apk
   - pwd
