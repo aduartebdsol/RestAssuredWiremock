@@ -62,3 +62,6 @@ script:
   - cd bds-app-acceptance-tests-mobile
   #- mvn -Dmaven.compiler.source=11 -Dcucumber.options="--tags "@Issue:BDSD-600  -Dtesting.apkPath="./tmpApp" -Dtesting.apkName="app-release2.apk" -Dtesting.deviceName="emulator-5554"  verify
   - mvn clean
+  - cd ..
+  - cd bds-app
+  - yarn
