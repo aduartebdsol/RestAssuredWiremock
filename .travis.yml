@@ -1,20 +1,63 @@
-sudo: required
-language: java
+language: android
+jdk: openjdk11
+env:
+  global:
+    - ANDROID_BUILD_TOOLS=28.0.3
+  matrix:
+    - API=19 ABI=armeabi-v7a
+#        - API=22 ABI=armeabi-v7a   # This API takes 12 min aprox to build
+#        - API=26 ABI=armeabi-v7a   # This API takes 12 min aprox to build
+#        - API=19 ABI=x86   # This API takes 12 min aprox to build
 cache:
+  yarn: true
   directories:
-    - .autoconf
+    # Android SDK
+    - $HOME/android-sdk-dl
+    - $HOME/android-sdk
+    # Node modules
+    - node_modules
+    # Maven
     - $HOME/.m2
-    - yarn: true
-#before_install: mvn clean
-#before_install:
-#  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version version-number
-#  - export PATH="$HOME/.yarn/bin:$PATH"
-
-script:
-  #  - mvn test
+android:
+  licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+  components:
+    - android-$API
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+before_install:
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
- # - ls
- # - cd bds-app
- # - git status
-  # - yarn
+  - PATH=$PATH:$JAVA_HOME/bin
+  - curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+  # Install nodejs
+  - sudo apt-get install nodejs
+  # ? Check out
+  - sudo apt-get install build-essential
+  # Install appium doctor
+  - npm install appium
+  - npm install appium-doctor
+  - "./node_modules/.bin/appium-doctor"
+  - "./node_modules/.bin/appium --log-level info > appium_log.txt &"
+  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+  # Create Emulator
+  - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
+  - echo no | android create avd --force -n test -t android-$API --abi $ABI
+  - emulator -avd test -no-skin -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+  - adb devices
+  # Download apk to tmpApp
+  - cd tmpApp
+  - wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1Yih6vrR84HrMDlo5YHOw68Xu7P2411YG' -O app-release2.apk
+  - pwd
+  - cd ..
+install:
+
+script:
+  - cd bds-app-acceptance-tests-mobile
+  #- mvn -Dmaven.compiler.source=11 -Dcucumber.options="--tags "@Issue:BDSD-600  -Dtesting.apkPath="./tmpApp" -Dtesting.apkName="app-release2.apk" -Dtesting.deviceName="emulator-5554"  verify
+  - mvn clean
