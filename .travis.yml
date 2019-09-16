@@ -7,5 +7,5 @@ cache:
 before_install: mvn clean
 script:
   - mvn test
-  - echo hola
+  - git clone https://alangdc:Odioamoto1!@github.com/gss-bds/bds-app.git
 
