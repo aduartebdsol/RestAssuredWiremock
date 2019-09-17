@@ -29,7 +29,6 @@ android:
     - extra-google-m2repository
     - extra-android-m2repository
 before_install:
-  - npm i -g npm@10.13.0
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
   - PATH=$PATH:$JAVA_HOME/bin
@@ -39,6 +38,7 @@ before_install:
   # ? Check out
   - sudo apt-get install build-essential
   # Install appium doctor
+  - npm i -g npm@10.13.0
   - npm install appium
   - npm install appium-doctor
   - "./node_modules/.bin/appium-doctor"
