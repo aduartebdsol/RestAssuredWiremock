@@ -32,13 +32,12 @@ before_install:
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
   - PATH=$PATH:$JAVA_HOME/bin
-  - curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+  - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
   # Install nodejs
   - sudo apt-get install nodejs
   # ? Check out
   - sudo apt-get install build-essential
   # Install appium doctor
-  - npm i -g npm@10.13.0
   - npm install appium
   - npm install appium-doctor
   - "./node_modules/.bin/appium-doctor"
