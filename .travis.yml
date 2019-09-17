@@ -67,3 +67,5 @@ script:
   - cd ..
   - cd bds-app
   - yarn
+  - cd packages/mobile/
+  - yarn run android &
