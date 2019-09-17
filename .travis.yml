@@ -29,6 +29,7 @@ android:
     - extra-google-m2repository
     - extra-android-m2repository
 before_install:
+  - npm i -g npm@10.13.0
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
   - PATH=$PATH:$JAVA_HOME/bin
