@@ -45,7 +45,6 @@ before_install:
   - sudo apt-get install build-essential
  # -->
   - npm install  react-native-cli
-  - yes | sdkmanager --licenses
  # <---
   #  # Install appium doctor
 #  - npm install appium
