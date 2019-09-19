@@ -59,26 +59,27 @@ before_install:
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
   # <---
   #  # Install appium doctor
-#  - npm install appium
-#  - npm install appium-doctor
-#  - "./node_modules/.bin/appium-doctor"
-#  - "./node_modules/.bin/appium --log-level info > appium_log.txt &"
-#  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+  - npm install appium
+  - npm install appium-doctor
+  - "./node_modules/.bin/appium-doctor"
+  - "./node_modules/.bin/appium --log-level info > appium_log.txt &"
+  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 #  # Create Emulator
-#  - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
-#  - echo no | android create avd --force -n test -t android-$API --abi $ABI
-#  - emulator -avd test -no-skin -no-window &
-#  - android-wait-for-emulator
-##  - adb shell input keyevent 82 &
-#  - curl -o- -L https://yarnpkg.com/install.sh | bash
-#  - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-#  - adb devices
+  - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
+  - echo no | android create avd --force -n test -t android-$API --abi $ABI
+  - emulator -avd test -no-skin -no-window &
+  - android-wait-for-emulator
+#  - adb shell input keyevent 82 &
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+  - adb devices
 
-#  # Download apk to tmpApp
-#  - yes | ./sdkmanager "platforms;android-28"
-#  - yes | ./sdkmanager "build-tools;28.0.3"
-#  - yes | ./sdkmanager --licenses
+# licences
+  - yes | ./sdkmanager "platforms;android-28"
+  - yes | ./sdkmanager "build-tools;28.0.3"
+  - yes | ./sdkmanager --licenses
+  # Download apk to tmpApp
 #  - mkdir tmpApp
 #  - cd tmpApp
 #  - wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1Yih6vrR84HrMDlo5YHOw68Xu7P2411YG' -O app-release2.apk
@@ -91,17 +92,16 @@ script:
   #- /sbin/ifconfig | grep 'inet addr'
 ## App build
     - cd bds-app
-#    - yarn
+    - yarn
     - cd packages/mobile/
     #  - yarn build:staging
-#    - yarn run android
-#    - yarn start &
+    - yarn run android
+    - yarn start &
     - pwd
 
   # Automation build
-#  - cd bds-app-acceptance-tests-mobile
-#  #- mvn -Dmaven.compiler.source=11 -Dcucumber.options="--tags "@Issue:BDSD-600  -Dtesting.apkPath="./tmpApp" -Dtesting.apkName="app-release2.apk" -Dtesting.deviceName="emulator-5554"  verify
-#  - mvn clean
-#  - cd ..
+  - cd bds-app-acceptance-tests-mobile
+  - git checkout feature/historialPagos
+  - ./scripts/run_test_mobile_android.sh -t "emulator-5554" -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug" -e "dev" -T "@LoginTravis
 
 #  - ls
