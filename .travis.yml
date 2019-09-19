@@ -87,4 +87,5 @@ script:
   - cd packages/mobile/
 #  - yarn build:staging
   - yarn run android
+  - yarn start &
 #  - ls
