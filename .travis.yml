@@ -24,15 +24,16 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
   components:
-    - android-$API
-    - extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-android-m2repository
+#    - android-$API
+#    - extra-google-google_play_services
+#    - extra-google-m2repository
+#    - extra-android-m2repository
+    - tools
     - platform-tools
     - tools
-    - build-tools-23.0.1
-    - extra-android-m2repository
-    - extra-google-google_play_services
+#    - build-tools-23.0.1
+#    - extra-android-m2repository
+##    - extra-google-google_play_services
     - extra-google-m2repository
 before_install:
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
@@ -45,6 +46,8 @@ before_install:
   - sudo apt-get install build-essential
  # -->
   - npm install  react-native-cli
+  - yes | sdkmanager "platforms;android-28"
+  - yes | sdkmanager "build-tools;28.0.3"
  # <---
   #  # Install appium doctor
 #  - npm install appium
