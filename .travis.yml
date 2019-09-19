@@ -85,5 +85,6 @@ script:
   - cd bds-app
   - yarn
   - cd packages/mobile/
-  - yarn build:staging
+#  - yarn build:staging
+  - yarn run android
 #  - ls
