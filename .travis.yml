@@ -62,15 +62,17 @@ before_install:
 #  - "./node_modules/.bin/appium-doctor"
 #  - "./node_modules/.bin/appium --log-level info > appium_log.txt &"
 #  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
 #  # Create Emulator
-  - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
-  - echo no | android create avd --force -n test -t android-$API --abi $ABI
-  - emulator -avd test -no-skin -no-window &
-  - android-wait-for-emulator
-#  - adb shell input keyevent 82 &
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-  - adb devices
+#  - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
+#  - echo no | android create avd --force -n test -t android-$API --abi $ABI
+#  - emulator -avd test -no-skin -no-window &
+#  - android-wait-for-emulator
+##  - adb shell input keyevent 82 &
+#  - curl -o- -L https://yarnpkg.com/install.sh | bash
+#  - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+#  - adb devices
+
 #  # Download apk to tmpApp
 #  - yes | ./sdkmanager "platforms;android-28"
 #  - yes | ./sdkmanager "build-tools;28.0.3"
@@ -93,9 +95,9 @@ script:
 
 #  - ls
 ## app build
-  - cd bds-app
-  - yarn
-  - cd packages/mobile/
-  #  - yarn build:staging
-  - yarn run android
-  - yarn start &
+#  - cd bds-app
+#  - yarn
+#  - cd packages/mobile/
+#  #  - yarn build:staging
+#  - yarn run android
+#  - yarn start &
