@@ -88,8 +88,15 @@ install:
 
 script:
 # Get ip adress
-  - /sbin/ifconfig | grep 'inet addr'
-
+  #- /sbin/ifconfig | grep 'inet addr'
+## App build
+    - cd bds-app
+#    - yarn
+    - cd packages/mobile/
+    #  - yarn build:staging
+#    - yarn run android
+#    - yarn start &
+    - pwd
 
   # Automation build
 #  - cd bds-app-acceptance-tests-mobile
@@ -98,10 +105,3 @@ script:
 #  - cd ..
 
 #  - ls
-## app build
-#  - cd bds-app
-#  - yarn
-#  - cd packages/mobile/
-#  #  - yarn build:staging
-#  - yarn run android
-#  - yarn start &
