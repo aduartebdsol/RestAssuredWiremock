@@ -24,10 +24,10 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
   components:
-#    - android-$API
-#    - extra-google-google_play_services
-#    - extra-google-m2repository
-#    - extra-android-m2repository
+    - android-$API
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
     - tools
     - platform-tools
     - tools
