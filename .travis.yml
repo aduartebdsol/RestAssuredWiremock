@@ -8,11 +8,13 @@ env:
 #        - API=22 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=26 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=19 ABI=x86   # This API takes 12 min aprox to build
+
+#--> For Get ip adress
 addons:
   apt:
     packages:
       - net-tools
-
+#<--
 cache:
   yarn: true
   directories:
@@ -85,7 +87,9 @@ before_install:
 install:
 
 script:
-  - /sbin/ifconfig
+# Get ip adress
+  - /sbin/ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}'
+
 
   # Automation build
 #  - cd bds-app-acceptance-tests-mobile
