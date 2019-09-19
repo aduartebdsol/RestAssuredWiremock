@@ -44,7 +44,7 @@ android:
     - extra-google-m2repository
 before_install:
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
-  - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
+  - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests.git
   - PATH=$PATH:$JAVA_HOME/bin
   - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
   # Install nodejs
@@ -100,7 +100,11 @@ script:
     - yarn start &
     - pwd
   # Automation build
-    - cd bds-app-acceptance-tests-mobile
+    - cd ..
+    - cd ..
+    - cd ..
+    - cd ..
+    - cd bds-app-acceptance-tests
     - git checkout feature/historialPagos
     - ./scripts/run_test_mobile_android.sh -t "emulator-5554" -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug" -e "dev" -T "@LoginTravis
 
