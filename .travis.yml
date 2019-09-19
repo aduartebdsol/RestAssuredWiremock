@@ -37,6 +37,7 @@ before_install:
   - sudo apt-get install nodejs
   # ? Check out
   - sudo apt-get install build-essential
+  - npm install -g react-native-cli
 #  # Install appium doctor
 #  - npm install appium
 #  - npm install appium-doctor
