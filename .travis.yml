@@ -1,5 +1,5 @@
 language: android
-jdk: openjdk11
+jdk: oraclejdk8
 env:
   global:
     - ANDROID_BUILD_TOOLS=28.0.3
