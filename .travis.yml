@@ -28,6 +28,12 @@ android:
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
+    - platform-tools
+    - tools
+    - build-tools-23.0.1
+    - extra-android-m2repository
+    - extra-google-google_play_services
+    - extra-google-m2repository
 before_install:
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
