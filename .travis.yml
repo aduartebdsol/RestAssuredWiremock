@@ -65,7 +65,7 @@ before_install:
   - "./node_modules/.bin/appium --log-level info > appium_log.txt &"
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-#  # Create Emulator
+  # Create Emulator
   - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
   - echo no | android create avd --force -n test -t android-$API --abi $ABI
   - emulator -avd test -no-skin -no-window &
@@ -75,11 +75,12 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
   - adb devices
 
-# licences
+
   - yes | ./sdkmanager "platforms;android-28"
   - yes | ./sdkmanager "build-tools;28.0.3"
   - yes | ./sdkmanager --licenses
-  # Download apk to tmpApp
+
+#  # Download apk to tmpApp
 #  - mkdir tmpApp
 #  - cd tmpApp
 #  - wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1Yih6vrR84HrMDlo5YHOw68Xu7P2411YG' -O app-release2.apk
@@ -98,10 +99,9 @@ script:
     - yarn run android
     - yarn start &
     - pwd
-
   # Automation build
-  - cd bds-app-acceptance-tests-mobile
-  - git checkout feature/historialPagos
-  - ./scripts/run_test_mobile_android.sh -t "emulator-5554" -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug" -e "dev" -T "@LoginTravis
+    - cd bds-app-acceptance-tests-mobile
+    - git checkout feature/historialPagos
+    - ./scripts/run_test_mobile_android.sh -t "emulator-5554" -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug" -e "dev" -T "@LoginTravis
 
 #  - ls
