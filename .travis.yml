@@ -8,6 +8,11 @@ env:
 #        - API=22 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=26 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=19 ABI=x86   # This API takes 12 min aprox to build
+addons:
+  apt:
+    packages:
+      - net-tools
+
 cache:
   yarn: true
   directories:
@@ -78,14 +83,19 @@ before_install:
 install:
 
 script:
+  - /sbin/ifconfig
+
+  # Automation build
 #  - cd bds-app-acceptance-tests-mobile
 #  #- mvn -Dmaven.compiler.source=11 -Dcucumber.options="--tags "@Issue:BDSD-600  -Dtesting.apkPath="./tmpApp" -Dtesting.apkName="app-release2.apk" -Dtesting.deviceName="emulator-5554"  verify
 #  - mvn clean
 #  - cd ..
+
+#  - ls
+## app build
   - cd bds-app
   - yarn
   - cd packages/mobile/
-#  - yarn build:staging
+  #  - yarn build:staging
   - yarn run android
   - yarn start &
-#  - ls
