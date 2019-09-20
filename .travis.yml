@@ -4,7 +4,7 @@ env:
   global:
     - ANDROID_BUILD_TOOLS=28.0.3
   matrix:
-    - API=28 ABI=armeabi-v7a
+    - API=26 ABI=armeabi-v7a
 #        - API=22 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=26 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=19 ABI=x86   # This API takes 12 min aprox to build
