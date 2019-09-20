@@ -105,6 +105,6 @@ script:
     - cd ..
     - cd bds-app-acceptance-tests
     - git checkout feature/historialPagos
-    - ./scripts/run_test_mobile_android.sh -t "emulator-5554" -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug" -e "dev" -T "@LoginTravis
+    - ./scripts/run_test_mobile_android.sh -t "emulator-5554" -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug" -e "dev" -T "@LoginTravis"
 
 #  - ls
