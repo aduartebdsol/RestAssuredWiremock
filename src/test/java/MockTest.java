@@ -38,6 +38,12 @@ public class MockTest {
                         .withStatus(200)
                         .withBodyFile("json/andyMegaResponse.json")));
 
+        wireMockServer.stubFor(get(urlEqualTo("/an/companies"))
+                .willReturn(aResponse()
+                        .withHeader("Content-Type", "text/plain")
+                        .withStatus(200)
+                        .withBodyFile("json/andyMegaResponse.json")));
+
     }
 
 
@@ -60,4 +66,21 @@ public class MockTest {
 
     }
 
+    @Test
+    public void testCompanies() {
+        String body = given().
+                when().
+                get("http://localhost:8090/an/companies").
+                then().
+                extract()
+                .asString();
+
+        String valorAverificar= "running";
+//        JSONArray pincodes = JsonPath.read(body);
+
+        System.out.println(body);
+
+        System.out.println("running");
+
+    }
 }
