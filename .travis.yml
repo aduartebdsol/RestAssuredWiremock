@@ -4,26 +4,10 @@ env:
   global:
     - ANDROID_BUILD_TOOLS=28.0.3
   matrix:
-    #  sys-img-$ABI-android-$API
-    #    - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
-    #    - echo no  | android create avd --force -n test -t android-$API --abi $ABI
-
-    #  sys-img-x86-android-26
-    #  sys-img-armeabi-v7a-android-17
-    #  echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a -c 100M
-
         - API=22 ABI=armeabi-v7a
-
 #        - API=22 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=26 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=19 ABI=x86   # This API takes 12 min aprox to build
-
-#--> For Get ip adress
-addons:
-  apt:
-    packages:
-      - net-tools
-#<--
 cache:
   yarn: true
   directories:
@@ -67,40 +51,31 @@ before_install:
   - yes | sdkmanager "platforms;android-28"
   - yes | sdkmanager "build-tools;28.0.3"
 
- # -->
+ # --> React Native
   - npm install  react-native-cli
   - npm install --save @sentry/react-native
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
   # <---
-  #  # Install appium doctor
-  - npm install appium
-  - npm install appium-doctor
-  - "./node_modules/.bin/appium-doctor"
-  - "./node_modules/.bin/appium --log-level info > appium_log.txt &"
-  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-  # Create Emulator
-  - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
-  - echo no | android create avd --force -n test -t android-$API --abi $ABI
-  - emulator -avd test -no-skin -no-window &
-  - android-wait-for-emulator
-#  - adb shell input keyevent 82 &
+#  #  # Install appium doctor
+#  - npm install appium
+#  - npm install appium-doctor
+#  - "./node_modules/.bin/appium-doctor"
+#  - "./node_modules/.bin/appium --log-level info > appium_log.txt &"
+#  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+#
+#  # Create Emulator
+#  - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
+#  - echo no | android create avd --force -n test -t android-$API --abi $ABI
+#  - emulator -avd test -no-skin -no-window &
+#  - android-wait-for-emulator
+
+ # Install Yarn
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
   - adb devices
 
 
-#  - yes | ./sdkmanager "platforms;android-28"
-#  - yes | ./sdkmanager "build-tools;28.0.3"
-#  - yes | ./sdkmanager --licenses
-
-#  # Download apk to tmpApp
-#  - mkdir tmpApp
-#  - cd tmpApp
-#  - wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1Yih6vrR84HrMDlo5YHOw68Xu7P2411YG' -O app-release2.apk
-#  - pwd
-#  - cd ..
-install:
 
 script:
 # Get ip adress
@@ -110,15 +85,14 @@ script:
     - yarn
     - cd packages/mobile/
     #  - yarn build:staging
-    - yarn run android
-    - yarn start &
-    - pwd
-  # Automation build
-    - cd ..
-    - cd ..
-    - cd ..
-    - cd bds-app-acceptance-tests
-    - git checkout feature/historialPagos
-    - ./scripts/run_test_mobile_android.sh -t "emulator-5554" -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug" -e "dev" -T "@LoginTravis"
-
-#  - ls
+#    - yarn run android
+    - yarn workspace @bds/mobile build:staging
+#    - yarn start &
+#    - pwd
+#  # Automation build
+#    - cd ..
+#    - cd ..
+#    - cd ..
+#    - cd bds-app-acceptance-tests
+#    - git checkout feature/historialPagos
+#    - ./scripts/run_test_mobile_android.sh -t "emulator-5554" -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug" -e "dev" -T "@LoginTravis"
