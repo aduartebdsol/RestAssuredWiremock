@@ -4,7 +4,7 @@ env:
   global:
     - ANDROID_BUILD_TOOLS=28.0.3
   matrix:
-    - API=19 ABI=armeabi-v7a
+    - API=21 ABI=armeabi-v7a
 #        - API=22 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=26 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=19 ABI=x86   # This API takes 12 min aprox to build
@@ -45,16 +45,21 @@ android:
 before_install:
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests.git
+
+  # path to javahome
   - PATH=$PATH:$JAVA_HOME/bin
-  - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+
   # Install nodejs
+  - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
   - sudo apt-get install nodejs
-  # ? Check out
   - sudo apt-get install build-essential
- # -->
-  - npm install  react-native-cli
+
+
   - yes | sdkmanager "platforms;android-28"
   - yes | sdkmanager "build-tools;28.0.3"
+
+ # -->
+  - npm install  react-native-cli
   - npm install --save @sentry/react-native
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
   # <---
