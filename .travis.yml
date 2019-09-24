@@ -4,8 +4,16 @@ env:
   global:
     - ANDROID_BUILD_TOOLS=28.0.3
   matrix:
-#    - API=21 ABI=armeabi-v7a
-    - API=21 ABI=x86
+    #  sys-img-$ABI-android-$API
+    #    - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
+    #    - echo no  | android create avd --force -n test -t android-$API --abi $ABI
+
+    #  sys-img-x86-android-26
+    #  sys-img-armeabi-v7a-android-17
+    #  echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a -c 100M
+
+        - API=22 ABI=armeabi-v7a
+
 #        - API=22 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=26 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=19 ABI=x86   # This API takes 12 min aprox to build
