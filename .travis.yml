@@ -86,7 +86,7 @@ script:
     #  - yarn build:staging
 #    - yarn run android
     - cd android/
-    - ./gradlew assembleRelease
+    - ./gradlew assembleRelease --stacktrace
 #    - yarn start &
 #    - pwd
 #  # Automation build
