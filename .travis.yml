@@ -78,15 +78,15 @@ before_install:
 
 
 script:
-# Get ip adress
-  #- /sbin/ifconfig | grep 'inet addr'
+
 ## App build
     - cd bds-app
     - yarn
     - cd packages/mobile/
     #  - yarn build:staging
 #    - yarn run android
-    - yarn workspace @bds/mobile build:staging
+    - cd
+    - ./gradlew assembleRelease
 #    - yarn start &
 #    - pwd
 #  # Automation build
