@@ -85,7 +85,7 @@ script:
     - cd packages/mobile/
     #  - yarn build:staging
 #    - yarn run android
-    - cd
+    - cd packages/mobile/android/
     - ./gradlew assembleRelease
 #    - yarn start &
 #    - pwd
