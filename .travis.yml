@@ -84,7 +84,7 @@ script:
     - yarn
     - cd packages/mobile/
     #  - yarn build:staging
-    - yarn run android &
+    - yarn run android
 #    - cd android/
 #    - ./gradlew assembleRelease --stacktrace
     - yarn start &
