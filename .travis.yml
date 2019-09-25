@@ -65,10 +65,10 @@ before_install:
 #  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 #
 #  # Create Emulator
-#  - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
-#  - echo no | android create avd --force -n test -t android-$API --abi $ABI
-#  - emulator -avd test -no-skin -no-window &
-#  - android-wait-for-emulator
+  - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
+  - echo no | android create avd --force -n test -t android-$API --abi $ABI
+  - emulator -avd test -no-skin -no-window &
+  - android-wait-for-emulator
 
  # Install Yarn
   - curl -o- -L https://yarnpkg.com/install.sh | bash
@@ -87,7 +87,7 @@ script:
     - yarn run android
 #    - cd android/
 #    - ./gradlew assembleRelease --stacktrace
-    - yarn start &
+    - yarn start
 #    - pwd
 #  # Automation build
 #    - cd ..
