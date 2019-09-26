@@ -43,18 +43,18 @@ before_install:
   - PATH=$PATH:$JAVA_HOME/bin
 
   # Install nodejs
-#  - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-#  - sudo apt-get install nodejs
-#  - sudo apt-get install build-essential
+  - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+  - sudo apt-get install nodejs
+  - sudo apt-get install build-essential
 #
 #
-#  - yes | sdkmanager "platforms;android-28"
-#  - yes | sdkmanager "build-tools;28.0.3"
+  - yes | sdkmanager "platforms;android-28"
+  - yes | sdkmanager "build-tools;28.0.3"
 #
 # # --> React Native
-#  - npm install  react-native-cli
-#  - npm install --save @sentry/react-native
-#  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+  - npm install  react-native-cli
+  - npm install --save @sentry/react-native
+  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 #  # <---
 #
 ##  #  # Install appium doctor
