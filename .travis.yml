@@ -36,35 +36,36 @@ android:
     - extra-google-google_play_services
     - extra-google-m2repository
 before_install:
+  # Clone private repos
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
-  - git clone https://aduartebdsol:$password@github.com/aduartebdsol/tmpbds-app-acceptance-tests-mobile.git
-
-  # path to javahome
-  - PATH=$PATH:$JAVA_HOME/bin
+  - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
 
   # Install nodejs
   - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
   - sudo apt-get install nodejs
   - sudo apt-get install build-essential
-#
-#
+
+  # Accept licences
   - yes | sdkmanager "platforms;android-28"
   - yes | sdkmanager "build-tools;28.0.3"
-#
-# # --> React Native
+
+  # --> React Native
   - npm install  react-native-cli
   - npm install --save @sentry/react-native
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-#  # <---
 
-  #  # Install appium doctor
+
+  # Install appium doctor
   - npm install appium
   - npm install appium-doctor
   - "./node_modules/.bin/appium-doctor"
   - "./node_modules/.bin/appium --log-level info > appium_log.txt &"
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+    # path to javahome
+  - PATH=$PATH:$JAVA_HOME/bin
 
-  # Create Emulator API=22 ABI=armeabi-v7a
+
+    # Create Emulator API=22 ABI=armeabi-v7a
     # echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-22
     # echo no | android create avd --force -n test -t android-22 --abi armeabi
   - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
@@ -73,10 +74,9 @@ before_install:
   - android-wait-for-emulator
   - adb devices
 
-# # Install Yarn
+  # Install Yarn
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
 
 
 
@@ -84,12 +84,12 @@ script:
 
 ## App build
 #    - cd bds-app
+#    - git clone BDSD-1339-recharge-payment-flow
 #    - yarn
 #    - cd packages/mobile/
-##    #  - yarn build:staging
-##    - yarn run android &
-#    - cd android/
-#    - ./gradlew app:assembleRelease --stacktrace
+#    - yarn run android &
+##    - cd android/
+##    - ./gradlew app:assembleRelease --stacktrace
 ##    - yarn start
 ###    - pwd
 ###  # Automation build
