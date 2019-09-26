@@ -69,11 +69,12 @@ before_install:
 #  - echo no | android create avd --force -n test -t android-$API --abi $ABI
 #  - emulator -avd test -no-skin -no-window &
 #  - android-wait-for-emulator
-#
+#  - adb devices
+
 # # Install Yarn
 #  - curl -o- -L https://yarnpkg.com/install.sh | bash
 #  - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-#  - adb devices
+
 
 
 
@@ -81,12 +82,12 @@ script:
 
 ## App build
     - cd bds-app
-#    - yarn
-#    - cd packages/mobile/
+    - yarn
+    - cd packages/mobile/
 #    #  - yarn build:staging
-#    - yarn run android
-##    - cd android/
-##    - ./gradlew assembleRelease --stacktrace
+#    - yarn run android &
+    - cd android/
+    - ./gradlew app:assembleRelease --stacktrace
 #    - yarn start
 ##    - pwd
 ##  # Automation build
