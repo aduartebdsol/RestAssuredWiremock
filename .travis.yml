@@ -84,17 +84,17 @@ before_install:
 
 script:
 
-## App build
-#    - cd bds-app
-#    - git clone BDSD-1339-recharge-payment-flow
-#    - yarn
-#    - cd packages/mobile/
-#    - yarn run android &
-#    tuve que hacer enter para salir del comando
-##    - cd android/
-##    - ./gradlew app:assembleRelease --stacktrace
-##    - yarn start
-###    - pwd
+# App build
+   - cd bds-app
+   - git clone BDSD-1339-recharge-payment-flow
+   - yarn
+   - cd packages/mobile/
+  #  - yarn run android &
+  #  tuve que hacer enter para salir del comando
+   - cd android/
+   - ./gradlew app:assembleRelease --stacktrace
+  #  - yarn start
+#    - pwd
 ###  # Automation build
 ##    - cd ..
 ##    - cd ..
