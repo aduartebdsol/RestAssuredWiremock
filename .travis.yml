@@ -38,7 +38,7 @@ android:
 before_install:
   # Clone private repos
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
-  - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
+  # - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
 
   # Install nodejs
   - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
@@ -56,12 +56,12 @@ before_install:
 
 
   # Install appium doctor
-  - PATH=$PATH:$JAVA_HOME/bin
-  - npm install appium
-  - npm install appium-doctor
-  - "./node_modules/.bin/appium-doctor"
-  - "./node_modules/.bin/appium --log-level info > appium_log.txt &"
-  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+  # - PATH=$PATH:$JAVA_HOME/bin
+  # - npm install appium
+  # - npm install appium-doctor
+  # - "./node_modules/.bin/appium-doctor"
+  # - "./node_modules/.bin/appium --log-level info > appium_log.txt &"
+  # - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
     # path to javahome
 
 
@@ -86,7 +86,7 @@ script:
 
 # App build
    - cd bds-app
-   - git clone BDSD-1339-recharge-payment-flow
+  #  - git clone BDSD-1339-recharge-payment-flow
    - yarn
    - cd packages/mobile/
   #  - yarn run android &
