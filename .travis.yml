@@ -87,12 +87,17 @@ script:
 # App build
    - cd bds-app
   #  - git clone BDSD-1339-recharge-payment-flow
-   - yarn
    - cd packages/mobile/
+   - yarn
   #  - yarn run android &
   #  tuve que hacer enter para salir del comando
    - cd android/
    - ./gradlew app:assembleRelease --stacktrace
+#    ./gradlew assembleRelease \
+#  -Pandroid.injected.signing.store.file=$KEYFILE \
+#  -Pandroid.injected.signing.store.password=$STORE_PASSWORD \
+#  -Pandroid.injected.signing.key.alias=$KEY_ALIAS \
+#  -Pandroid.injected.signing.key.password=$KEY_PASSWORD
   #  - yarn start
 #    - pwd
 ###  # Automation build
