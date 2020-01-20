@@ -4,7 +4,7 @@ env:
   global:
     - ANDROID_BUILD_TOOLS=28.0.3
   matrix:
-        - API=22 ABI=armeabi-v7a
+    - API=22 ABI=armeabi-v7a
 #        - API=22 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=26 ABI=armeabi-v7a   # This API takes 12 min aprox to build
 #        - API=19 ABI=x86   # This API takes 12 min aprox to build
@@ -20,9 +20,9 @@ cache:
     - $HOME/.m2
 android:
   licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
+    - "android-sdk-preview-license-.+"
+    - "android-sdk-license-.+"
+    - "google-gdk-license-.+"
   components:
     - android-$API
     - extra-google-google_play_services
@@ -37,8 +37,8 @@ android:
     - extra-google-m2repository
 before_install:
   # Clone private repos
-  - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
-  # - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
+  #- git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
+  - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
 
   # Install nodejs
   - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
@@ -50,63 +50,61 @@ before_install:
   - yes | sdkmanager "build-tools;28.0.3"
 
   # --> React Native
-  - npm install  react-native-cli
-  - npm install --save @sentry/react-native
-  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
+  #- npm install  react-native-cli
+  #- npm install --save @sentry/react-native
+  #- echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
   # Install appium doctor
-  # - PATH=$PATH:$JAVA_HOME/bin
-  # - npm install appium
-  # - npm install appium-doctor
-  # - "./node_modules/.bin/appium-doctor"
-  # - "./node_modules/.bin/appium --log-level info > appium_log.txt &"
-  # - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-    # path to javahome
+  - PATH=$PATH:$JAVA_HOME/bin
+  - npm install appium
+  - npm install appium-doctor
+  - "./node_modules/.bin/appium-doctor"
+  - "./node_modules/.bin/appium --log-level info > appium_log.txt &"
+  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+  # path to javahome
 
-
-
-    # Create Emulator API=22 ABI=armeabi-v7a
-    # echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-22
-    # echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
-    # echo no | android create avd --force -n test -t android-22 --abi armeabi
-#  - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
-#  - echo no | android create avd --force -n test -t android-$API --abi $ABI
-#  - emulator -avd test -no-skin -no-window &
-#  - android-wait-for-emulator
-#  - adb devices
-
+  # Create Emulator API=22 ABI=armeabi-v7a
+  # echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-22
+  # echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  # echo no | android create avd --force -n test -t android-22 --abi armeabi
+  - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
+  - echo no | android create avd --force -n test -t android-$API --abi $ABI
+  - emulator -avd test -no-skin -no-window &
+  - android-wait-for-emulator
+  - adb devices
+  # Download apk to tmpApp
+  - mkdir tmpApp
+  - cd tmpApp
+  - wget --no-check-certificate 'https://bitrise-prod-build-storage.s3.amazonaws.com/builds/f557d7cdc2ac9adc/artifacts/29214553/app-yellow-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAIV2YZWMVCNWNR2HA%2F20200120%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200120T193029Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&X-Amz-Signature=d4cbff6b763afd6155f791e8d759ee0f755f5cb4d99efe1a63465372e427dfd0' -O app-release.apk
+  - pwd
+  - ls -lh
+  - cd ..
   # Install Yarn
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-
+  # - curl -o- -L https://yarnpkg.com/install.sh | bash
+  # - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 script:
-
-# App build
-   - cd bds-app
+  # App build
+  # - cd bds-app
   #  - git clone BDSD-1339-recharge-payment-flow
-   - cd packages/mobile/
-   - yarn
+  # - cd packages/mobile/
+  # - yarn
   #  - yarn run android &
   #  tuve que hacer enter para salir del comando
-   - cd android/
-   - ./gradlew app:assembleRelease --stacktrace
-#    ./gradlew assembleRelease \
-#  -Pandroid.injected.signing.store.file=$KEYFILE \
-#  -Pandroid.injected.signing.store.password=$STORE_PASSWORD \
-#  -Pandroid.injected.signing.key.alias=$KEY_ALIAS \
-#  -Pandroid.injected.signing.key.password=$KEY_PASSWORD
+  # - cd android/
+  # - ./gradlew app:assembleRelease --stacktrace
+  #    ./gradlew assembleRelease \
+  #  -Pandroid.injected.signing.store.file=$KEYFILE \
+  #  -Pandroid.injected.signing.store.password=$STORE_PASSWORD \
+  #  -Pandroid.injected.signing.key.alias=$KEY_ALIAS \
+  #  -Pandroid.injected.signing.key.password=$KEY_PASSWORD
   #  - yarn start
-#    - pwd
-###  # Automation build
-##    - cd ..
-##    - cd ..
-##    - cd ..
-##    - cd bds-app-acceptance-tests
-##    - git checkout feature/historialPagos
-##    - ./scripts/run_test_mobile_android.sh -t "emulator-5554" -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug" -e "dev" -T "@LoginTravis"
-#  mvn   -Dtesting.driver="android"  -Dtesting.apkName="app-debug.apk"   -Dtesting.appiumLocation="http://0.0.0.0:4723"   -Dtesting.wiremockHost="localhost"   -Dtesting.wiremockPort="8765"   -Dtesting.layer="MOBILE"   -Dtesting.apkPath="/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug"   -Dtesting.deviceName="emulator-5554"   -Dtesting.deviceType="${deviceType}"   -Dtesting.env="dev" -Dcucumber.options="@LoginTravis"   -Dserenity.outputDirectory="prueba/${deviceName}"  clean verify --quiet
-
-
+  #    - pwd
+  ###  # Automation build
+  ##    - cd ..
+  ##    - cd ..
+  ##    - cd ..
+  - cd bds-app-acceptance-tests
+  - git checkout feature/paymentAutomation
+  ##    - ./scripts/run_test_mobile_android.sh -t "emulator-5554" -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug" -e "dev" -T "@LoginTravis"
+  #- mvn   -Dtesting.driver="android"  -Dtesting.apkName="app-debug.apk"   -Dtesting.appiumLocation="http://0.0.0.0:4723"   -Dtesting.wiremockHost="localhost"   -Dtesting.wiremockPort="8765"   -Dtesting.layer="MOBILE"   -Dtesting.apkPath="/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug"   -Dtesting.deviceName="emulator-5554"   -Dtesting.deviceType="${deviceType}"   -Dtesting.env="dev" -Dcucumber.options="@LoginTravis"   -Dserenity.outputDirectory="prueba/${deviceName}"  clean verify --quiet
