@@ -75,7 +75,7 @@ before_install:
   # Download apk to tmpApp
   - mkdir tmpApp
   - cd tmpApp
-  - wget --no-check-certificate 'https://bitrise-prod-build-storage.s3.amazonaws.com/builds/f557d7cdc2ac9adc/artifacts/29214553/app-yellow-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAIV2YZWMVCNWNR2HA%2F20200120%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200120T193029Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&X-Amz-Signature=d4cbff6b763afd6155f791e8d759ee0f755f5cb4d99efe1a63465372e427dfd0' -O app-release.apk
+  - curl --location --request GET 'https://bitrise-prod-build-storage.s3.amazonaws.com/builds/f557d7cdc2ac9adc/artifacts/29214553/app-yellow-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAIV2YZWMVCNWNR2HA%2F20200120%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200120T193029Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&X-Amz-Signature=d4cbff6b763afd6155f791e8d759ee0f755f5cb4d99efe1a63465372e427dfd0'
   - pwd
   - ls -lh
   - cd ..
