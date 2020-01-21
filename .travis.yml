@@ -75,7 +75,7 @@ before_install:
   # Download apk to tmpApp
   - mkdir tmpApp
   - cd tmpApp
-  - wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1KSmx9UKoLVcJkhTtsRDr0mwvqyIBmVtX' -O app-release.apk
+  - wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1KSmx9UKoLVcJkhTtsRDr0mwvqyIBmVtX' -O app-development-debug.apk
   - pwd
   - ls -lh
   - cd ..
