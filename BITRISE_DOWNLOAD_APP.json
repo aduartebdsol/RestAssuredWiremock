@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "6decf504-e3fd-4d94-8991-b3264fc64de2",
+		"name": "BITRISE_DOWNLOAD_APP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://api.bitrise.io/v0.1/apps/6325ff8a076da038/builds/f557d7cdc2ac9adc/artifacts/3425d3e55e28b15a",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "524748e8-ceaf-4e04-a064-7623e42524e1",
+						"exec": [
+							"",
+							"   let json_response = JSON.parse(responseBody);",
+							"",
+							"",
+							"",
+							"pm.globals.set(\"urlDownload\", json_response.data.expiring_download_url);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Sp6b6HFKU3-Cyq09tdkrM5u_Q4GjQE48gqxdPEkAfW7A4I121HeEWO0Xp4lsQ5O0hax_XSOhAAU3ZuHt2YlqiQ",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.bitrise.io/v0.1/apps/6325ff8a076da038/builds/f557d7cdc2ac9adc/artifacts/3425d3e55e28b15a",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bitrise",
+						"io"
+					],
+					"path": [
+						"v0.1",
+						"apps",
+						"6325ff8a076da038",
+						"builds",
+						"f557d7cdc2ac9adc",
+						"artifacts",
+						"3425d3e55e28b15a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{urlDownload}}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlDownload}}",
+					"host": [
+						"{{urlDownload}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
