@@ -36,6 +36,7 @@ android:
     - extra-google-google_play_services
     - extra-google-m2repository
 before_install:
+  - PATH=$PATH:$JAVA_HOME/bin
   # Clone private repos
   #- git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
