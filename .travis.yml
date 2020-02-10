@@ -61,7 +61,7 @@ before_install:
   - npm install appium-doctor
   - "./node_modules/.bin/appium-doctor"
   - "./node_modules/.bin/appium --log-level info > appium_log.txt &"
-  # - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
   # Install Newman
   - npm install newman
 
