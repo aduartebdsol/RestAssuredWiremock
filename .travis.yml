@@ -76,6 +76,7 @@ before_install:
   - adb devices
 
   # Install Yarn
+  - sudo apt-key adv --keyserver keyserver.ubuntu.com --refresh-keys
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
