@@ -54,7 +54,6 @@ before_install:
   - npm install --save @sentry/react-native
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-
   # Install appium doctor
   # - PATH=$PATH:$JAVA_HOME/bin
   # - npm install appium
