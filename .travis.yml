@@ -66,6 +66,6 @@ script:
 - cd ..
 - cd ..
 - cd ..
-- cd bds-app-acceptance-tests
+- cd bds-app-acceptance-tests-mobile
 - git checkout fix/keyboardCompleteField
 - ./scripts/run_test_mobile_android.sh -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug" -d "emulator-5554" -T @Integration -n "app-development-debug"
