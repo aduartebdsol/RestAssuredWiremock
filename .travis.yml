@@ -30,8 +30,9 @@ android:
   - extra-google-google_play_services
   - extra-google-m2repository
 before_install:
-- openssl aes-256-cbc -K $encrypted_afa0bd3e6557_key -iv $encrypted_afa0bd3e6557_iv
-  -in tmp.pub.enc -out tmp.pub -d
+- openssl aes-256-cbc -K $encrypted_492c890bafbd_key -iv $encrypted_492c890bafbd_iv
+  -in deploy.enc -out ./deploy -d
+- ssh-add ./deploy
 - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
 - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 - sudo apt-get install nodejs
@@ -42,17 +43,17 @@ before_install:
 - npm install --save @sentry/react-native
 - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl
   -p
-- echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
-- echo no | android create avd --force -n test -t android-$API --abi $ABI
-- emulator -avd test -no-skin -no-window &
-- android-wait-for-emulator
-- adb devices
+# - echo "y" | android update sdk -a --no-ui --filter sys-img-$ABI-android-$API
+# - echo no | android create avd --force -n test -t android-$API --abi $ABI
+# - emulator -avd test -no-skin -no-window &
+# - android-wait-for-emulator
+# - adb devices
 - sudo apt-key adv --keyserver keyserver.ubuntu.com --refresh-keys
 - curl -o- -L https://yarnpkg.com/install.sh | bash
 - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 script:
 - cd bds-app
 - yarn
-- cd packages/mobile/
-- yarn start --reset-cache &
-- yarn android
+# - cd packages/mobile/
+# # - yarn start --reset-cache &
+# - yarn android
