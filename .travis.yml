@@ -72,6 +72,7 @@ before_install:
 script:
 ###  # App Buid
 - cd bds-app
+- git checkout BDSD-5894-payment-modal-home-screen
 - yarn
 - cd packages/mobile/
 - yarn start --reset-cache &
@@ -82,4 +83,4 @@ script:
 - cd ..
 - cd bds-app-acceptance-tests-mobile
 - git checkout fix/keyboardCompleteField
-- ./scripts/run_test_mobile_android.sh -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug" -d "emulator-5554" -T @Integration -n "app-development-debug"
+- ./scripts/run_test_mobile_android.sh -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/development/debug" -d "emulator-5554" -T @Integration -n "app-development-debug"
