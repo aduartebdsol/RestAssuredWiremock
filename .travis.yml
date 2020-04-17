@@ -33,6 +33,8 @@ before_install:
 - eval "$(ssh-agent -s)"
 - openssl aes-256-cbc -K $encrypted_492c890bafbd_key -iv $encrypted_492c890bafbd_iv
   -in deploy.enc -out ./deploy -d
+- sudo chmod 600 ~/.ssh/id_rsa
+- sudo chmod 600 ~/.ssh/id_rsa.pub
 - ssh-add ./deploy
 - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
 - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
