@@ -10,6 +10,7 @@ cache:
   directories:
   - "$HOME/android-sdk-dl"
   - "$HOME/android-sdk"
+  - "$HOME/bds-app"
   - node_modules
   - "$HOME/.m2"
 android:
@@ -55,8 +56,16 @@ before_install:
 - curl -o- -L https://yarnpkg.com/install.sh | bash
 - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 script:
+###  # App Buid
 - cd bds-app
 - yarn
 - cd packages/mobile/
 - yarn start --reset-cache &
 - yarn android
+###  # Automation Run
+- cd ..
+- cd ..
+- cd ..
+- cd bds-app-acceptance-tests
+- git checkout fix/keyboardCompleteField
+- ./scripts/run_test_mobile_android.sh -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/debug" -d "emulator-5554" -T @Integration -n "app-development-debug"
