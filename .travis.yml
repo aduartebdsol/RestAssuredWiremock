@@ -30,6 +30,7 @@ android:
   - extra-google-google_play_services
   - extra-google-m2repository
 before_install:
+- eval "$(ssh-agent -s)"
 - openssl aes-256-cbc -K $encrypted_492c890bafbd_key -iv $encrypted_492c890bafbd_iv
   -in deploy.enc -out ./deploy -d
 - ssh-add ./deploy
