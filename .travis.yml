@@ -4,7 +4,7 @@ env:
   global:
   - ANDROID_BUILD_TOOLS=28.0.3
   matrix:
-  - API=22 ABI=armeabi-v7a
+  - API=27 ABI=armeabi-v7a
 cache:
   yarn: true
   directories:
