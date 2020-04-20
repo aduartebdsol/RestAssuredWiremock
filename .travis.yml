@@ -252,7 +252,9 @@ install:
   # This double "sudo" monstrosity is used to have Travis execute the
   # emulator with its new group permissions and help preserve the rule
   # of least privilege.
-  - sudo -E sudo -u $USER -E bash -c "${ANDROID_HOME}/emulator/${EMU_COMMAND} ${EMU_PARAMS} &"
+  - sudo -E sudo -u $USER -E bash -c "${ANDROID_HOME}/emulator/emulator ${EMU_PARAMS} &"
+    # 
+    # bash: /home/travis/android-sdk/emulator/emulator-headless: No such file or directory
 
   # install flutter (while emulator is starting)
   - sudo apt-get install -y --no-install-recommends lib32stdc++6 libstdc++6 > /dev/null
