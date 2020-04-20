@@ -162,9 +162,7 @@ install:
   - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
   - sudo apt-get install nodejs
   - sudo apt-get install build-essential
-  ## Install sdkmanager
-  - yes | sdkmanager "platforms;android-28"
-  - yes | sdkmanager "build-tools;28.0.3"
+  ## 
   ## Install Reactnative CLI
   - npm install  react-native-cli
   - npm install --save @sentry/react-native
