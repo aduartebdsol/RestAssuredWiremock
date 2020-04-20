@@ -105,7 +105,7 @@ install:
 
   # Create an Android emulator    - API=29 ABI=x86         GOO=default
 #  - echo no | avdmanager --verbose create avd --force -n test -k "system-images;android-$API;$GOO;$ABI" -c 10M
-  - echo no | avdmanager --verbose create avd --force -n test -k "system-images;android-$API;$GOO;$ABI"
+  - echo no | avdmanager --verbose create avd --force -n test -k "system-images;android-29;default;x86"
 #  - EMU_PARAMS="
 #      -verbose
 #      -no-snapshot
