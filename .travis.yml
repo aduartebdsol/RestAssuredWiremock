@@ -101,9 +101,9 @@ install:
   - ${ANDROID_HOME}/emulator/emulator -version
 
   - sdkmanager "extras;android;m2repository" >/dev/null
-  - sdkmanager "system-images;android-$API;$GOO;$ABI" >/dev/null # install system images for emulator
+  - sdkmanager "system-images;android-29;default;x86" >/dev/null # install system images for emulator
 
-  # Create an Android emulator
+  # Create an Android emulator    - API=29 ABI=x86         GOO=default
 #  - echo no | avdmanager --verbose create avd --force -n test -k "system-images;android-$API;$GOO;$ABI" -c 10M
   - echo no | avdmanager --verbose create avd --force -n test -k "system-images;android-$API;$GOO;$ABI"
 #  - EMU_PARAMS="
