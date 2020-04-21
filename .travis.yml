@@ -28,9 +28,9 @@ install:
 - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
 - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
 ## Install yarn
-- sudo apt-key adv --keyserver keyserver.ubuntu.com --refresh-keys
 - curl -o- -L https://yarnpkg.com/install.sh | bash
-- export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+- export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"    
+- gem install cocoapods --pre
 script:
 # - detox build --configuration ios.sim.release
 # - detox test --configuration ios.sim.release --cleanup
