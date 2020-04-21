@@ -1,328 +1,45 @@
-language: generic
-dist: bionic
+language: objective-c
+osx_image: xcode8.3
 
-# specify global envs and jobs
+branches:
+  only:
+  - master
+
 env:
   global:
-    - ANDROID_TOOLS=4333796 # android-28
-    - ANDROID_HOME=${HOME}/android-sdk
-    - GRAVIS="https://raw.githubusercontent.com/DanySK/Gravis-CI/master/"
-    - JDK="1.8" # the JDK used for running tests
-    - TOOLS=${ANDROID_HOME}/tools
-    # PATH order is incredibly important. e.g. the 'emulator' script exists in more than one place!
-    - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
-    - FLUTTER_CHANNEL=stable
-    - FLUTTER_VERSION=1.9.1+hotfix.6-${FLUTTER_CHANNEL}
-    - FLUTTER_HOME=${HOME}/flutter
-    - PATH=${HOME}/.pub-cache/bin:${PATH}
-    - PATH=${FLUTTER_HOME}/bin:${FLUTTER_HOME}/bin/cache/dart-sdk/bin:${PATH}
-
-  # matrix of APIxABIxGOO
-  # (see "sdkmanager --list --verbose| grep ^system-images" for full list)
-  jobs:
-    # - API=29 ABI=x86_64      GOO=google_apis_playstore
-    # - API=29 ABI=x86         GOO=google_apis_playstore
-    # - API=29 ABI=x86_64      GOO=google_apis
-    # - API=29 ABI=x86         GOO=google_apis
-    # - API=29 ABI=x86_64      GOO=default
-    - API=29 ABI=x86         GOO=default
-
-
-    # - API=28 ABI=x86_64      GOO=google_apis_playstore
-    # - API=28 ABI=x86         GOO=google_apis_playstore
-    # - API=28 ABI=x86_64      GOO=google_apis
-    # - API=28 ABI=x86         GOO=google_apis
-    # - API=28 ABI=x86_64      GOO=default
-    # - API=28 ABI=x86         GOO=default
-
-    # - API=27 ABI=x86         GOO=google_apis_playstore
-    # - API=27 ABI=x86         GOO=google_apis
-    # - API=27 ABI=x86_64      GOO=default
-    # - API=27 ABI=x86         GOO=default
-
-    # - API=26 ABI=x86         GOO=google_apis_playstore
-    # - API=26 ABI=x86_64      GOO=google_apis
-    # - API=26 ABI=x86         GOO=google_apis
-    # - API=26 ABI=x86_64      GOO=default
-    # - API=26 ABI=x86         GOO=default
-
-    # - API=25 ABI=x86         GOO=google_apis_playstore
-    # - API=25 ABI=x86_64      GOO=google_apis
-    # - API=25 ABI=x86         GOO=google_apis
-    # - API=25 ABI=x86_64      GOO=default
-    # - API=25 ABI=x86         GOO=default
-    # - API=25 ABI=armeabi-v7a GOO=google_apis
-    # - API=25 ABI=arm64-v8a   GOO=google_apis
-
-    # - API=24 ABI=x86_64      GOO=google_apis
-    # - API=24 ABI=x86         GOO=google_apis
-    # - API=24 ABI=armeabi-v7a GOO=google_apis
-    # - API=24 ABI=arm64-v8a   GOO=google_apis
-    # - API=24 ABI=x86_64      GOO=default
-    # - API=24 ABI=x86         GOO=default
-    # - API=24 ABI=armeabi-v7a GOO=default
-    # - API=24 ABI=arm64-v8a   GOO=default
-
-    # - API=23 ABI=x86_64      GOO=google_apis
-    # - API=23 ABI=x86         GOO=google_apis
-    # - API=23 ABI=armeabi-v7a GOO=google_apis
-    # - API=23 ABI=x86_64      GOO=default
-    # - API=23 ABI=x86         GOO=default
-    # - API=23 ABI=armeabi-v7a GOO=default
-
-    # - API=22 ABI=x86_64      GOO=google_apis
-    # - API=22 ABI=x86         GOO=google_apis
-    # - API=22 ABI=armeabi-v7a GOO=google_apis
-    # - API=22 ABI=x86_64      GOO=default
-    # - API=22 ABI=x86         GOO=default
-    # - API=22 ABI=armeabi-v7a GOO=default
-
-    # - API=21 ABI=x86_64      GOO=google_apis
-    # - API=21 ABI=x86         GOO=google_apis
-    # - API=21 ABI=armeabi-v7a GOO=google_apis
-    # - API=21 ABI=x86_64      GOO=default
-    # - API=21 ABI=x86         GOO=default
-    # - API=21 ABI=armeabi-v7a GOO=default
-
-    # # API=20  -- not released
-
-    # - API=19 ABI=x86         GOO=google_apis
-    # - API=19 ABI=x86         GOO=default
-    # - API=19 ABI=armeabi-v7a GOO=google_apis
-    # - API=19 ABI=armeabi-v7a GOO=default
-
-    # - API=18 ABI=x86         GOO=google_apis
-    # - API=18 ABI=x86         GOO=default
-    # - API=18 ABI=armeabi-v7a GOO=google_apis
-    # - API=18 ABI=armeabi-v7a GOO=default
-
-    # - API=17 ABI=x86         GOO=google_apis
-    # - API=17 ABI=x86         GOO=default
-    # - API=17 ABI=armeabi-v7a GOO=google_apis
-    # - API=17 ABI=armeabi-v7a GOO=default
-
-    # - API=16 ABI=x86         GOO=google_apis
-    # - API=16 ABI=x86         GOO=default
-    # - API=16 ABI=armeabi-v7a GOO=google_apis
-    # - API=16 ABI=armeabi-v7a GOO=default
-
-    # API=15 -- not supported by flutter
-    # API=14 -- not released
-    # API=13 -- not released
-    # API=12 -- not released
-    # API=11 -- not released
-    # API=10 -- not supported by flutter
-
-jobs:
-  fast_finish: true
-  # jobs that are flakey or fail consistently     
-
-  allow_failures:
-    # - env: API=29 ABI=x86_64      GOO=google_apis_playstore # flutter driver: "No devices found."
-    # - env: API=29 ABI=x86         GOO=google_apis_playstore # flutter doctor: device offline
-    # - env: API=29 ABI=x86_64      GOO=google_apis # flutter drive: "Bad state: No element"
-    # - env: API=29 ABI=x86         GOO=google_apis # DriverError: Failed to fulfill GetHealth due to remote error
-    # - env: API=29 ABI=x86_64      GOO=default     # hangs while resolving gradle dependencies, etc...
-    - env: API=29 ABI=x86         GOO=default     # hangs while resolving dependencies
-
-    # - env: API=28 ABI=x86_64      GOO=google_apis_playstore # flutter driver hangs
-    # - env: API=28 ABI=x86         GOO=google_apis_playstore # flutter driver hangs
-    # - env: API=28 ABI=x86         GOO=google_apis # DriverError: Failed to fulfill GetHealth due to remote error
-
-    # - env: API=26 ABI=x86         GOO=google_apis_playstore # hangs after installing apk
-    # - env: API=26 ABI=x86         GOO=google_apis # hangs during assembleDebug and resolving dependencies
-    # - env: API=26 ABI=x86         GOO=default     # emulator hangs
-
-    # - env: API=25 ABI=x86         GOO=google_apis_playstore # hangs after installing apk
-    # - env: API=25 ABI=armeabi-v7a GOO=google_apis # flutter drive reports "apk: Can't find service: package"
-    # - env: API=25 ABI=arm64-v8a   GOO=google_apis # Timeout (600 seconds) reached; failed to start emulator
-
-    # - env: API=24 ABI=x86         GOO=google_apis # flutter driver hangs after resolving gradle dependencies
-    # - env: API=24 ABI=armeabi-v7a GOO=google_apis # hangs during Installing build/app/outputs/apk/app.apk...
-    # - env: API=24 ABI=arm64-v8a   GOO=google_apis # Timeout (600 seconds) reached; failed to start emulator
-    # - env: API=24 ABI=armeabi-v7a GOO=default     # hangs after installing apk
-    # - env: API=24 ABI=arm64-v8a   GOO=default     # Timeout (600 seconds) reached; failed to start emulator
-
-    # - env: API=23 ABI=armeabi-v7a GOO=google_apis # hangs during Installing build/app/outputs/apk/app.apk...
-    # - env: API=23 ABI=armeabi-v7a GOO=default     # hangs after installing apk
-
-    # - env: API=22 ABI=x86_64      GOO=google_apis # hangs during gradle assemble
-    # - env: API=22 ABI=armeabi-v7a GOO=google_apis # hangs after installing apk
-    # - env: API=22 ABI=x86_64      GOO=default     # flutter drive hangs during installation of apk
-
-    # - env: API=21 ABI=armeabi-v7a GOO=google_apis # Timeout (600 seconds) reached; failed to start emulator
-    # - env: API=21 ABI=armeabi-v7a GOO=default     # hangs before test starts
-
-    # - env: API=19 ABI=armeabi-v7a GOO=google_apis # hangs after installing apk
-    # - env: API=19 ABI=armeabi-v7a GOO=default     # hangs on Installing build/app/outputs/apk/app.apk...
-
-    # - env: API=18 ABI=x86         GOO=google_apis # hangs during test
-    # - env: API=18 ABI=x86         GOO=default     # hangs during flutter doctor
-    # - env: API=18 ABI=armeabi-v7a GOO=google_apis # flutter driver: incorrect success after installing apk
-
-    # - env: API=17 ABI=x86         GOO=google_apis # FlutterDriver: It is taking an unusually long time to connect to the VM...
-    # - env: API=17 ABI=x86         GOO=default     # FlutterDriver: It is taking an unusually long time to connect to the VM...
-
-    # - env: API=16 ABI=x86         GOO=google_apis # FlutterDriver: It is taking an unusually long time to connect to the VM...
-    # - env: API=16 ABI=x86         GOO=default     # FlutterDriver: It is taking an unusually long time to connect to the VM...
-    # - env: API=16 ABI=armeabi-v7a GOO=google_apis # hangs after installing apk
-    # - env: API=16 ABI=armeabi-v7a GOO=default     # hangs after installing apk
-
-before_install:
-  - java -version
-
-  # Set up KVM
-  - sudo apt-get -y --no-install-recommends install bridge-utils libpulse0 libvirt-bin qemu-kvm virtinst ubuntu-vm-builder > /dev/null
-  # add travis user to groups
-  - sudo adduser $USER libvirt
-  - sudo adduser $USER kvm
-
-  # Set up JDK 8 for Android SDK
-  - curl "${GRAVIS}.install-jdk-travis.sh" --output ~/.install-jdk-travis.sh
-  - export TARGET_JDK="${JDK}"
-  - JDK="1.8" # used when running sdkmanager
-  - source ~/.install-jdk-travis.sh
-
-  # Set up Android SDK
-  - wget -q "https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_TOOLS.zip" -O android-sdk-tools.zip
-  - unzip -q android-sdk-tools.zip -d ${ANDROID_HOME}
-  - rm android-sdk-tools.zip
-
-  # Avoid harmless sdkmanager warning
-  - mkdir ~/.android
-  - echo 'count=0' > ~/.android/repositories.cfg
-
-  # Accept licenses before installing components, no need to echo y for each component
-  - yes | sdkmanager --licenses >/dev/null
+  - NODE_VERSION=stable
 
 install:
-  # Download SDK tools
-  - sdkmanager "platform-tools" >/dev/null
-  - sdkmanager "tools" >/dev/null # A second time per Travis docs, gets latest versions
-  - sdkmanager "build-tools;28.0.3" >/dev/null # Implicit gradle dependency - gradle drives changes
-  - sdkmanager "platforms;android-$API" >/dev/null # We need the API of the emulator we will run
-  - sdkmanager "platforms;android-28" >/dev/null # We need the API of the current compileSdkVersion from gradle.properties  -
+- brew tap wix/brew
+- brew install applesimutils
+- curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+- export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+- nvm install $NODE_VERSION
+- nvm use $NODE_VERSION
+- nvm alias default $NODE_VERSION
 
-  - sdkmanager "emulator" >/dev/null
-  - |
-    if [[ $ABI =~ "arm" ]]; then
-      # Download a pinned version of the emulator since default version can cause issues
-      ${ANDROID_HOME}/emulator/emulator -version
-      emulator_version=5264690 # 29.2.1.0 (build_id 5889189) ==> 28.0.23.0 (build_id 5264690)
-      # sudo apt-get install -y libunwind8 libc++1
-      curl -fo emulator.zip "https://dl.google.com/android/repository/emulator-linux-$emulator_version.zip"
-      rm -rf "${ANDROID_HOME}/emulator"
-      unzip -q emulator.zip -d "${ANDROID_HOME}"
-      rm -f emulator.zip
-      # install build tools and platforms for arm (to allow emulator to run)
-      sdkmanager "build-tools;25.0.2" "platforms;android-25" > /dev/null
-    fi
-  - ${ANDROID_HOME}/emulator/emulator -version
+- npm install -g react-native-cli
+- npm install -g detox-cli
 
-  - sdkmanager "extras;android;m2repository" >/dev/null
-  - sdkmanager "system-images;android-$API;$GOO;$ABI" >/dev/null # install system images for emulator
-
-  # Create an Android emulator
-#  - echo no | avdmanager --verbose create avd --force -n test -k "system-images;android-$API;$GOO;$ABI" -c 10M
-  - echo no | avdmanager --verbose create avd --force -n test -k "system-images;android-$API;$GOO;$ABI"
-#  - EMU_PARAMS="
-#      -verbose
-#      -no-snapshot
-#      -no-window
-#      -no-audio
-#      -no-boot-anim
-#      -camera-back none
-#      -camera-front none
-#      -selinux permissive
-#      -qemu -m 2048"
-  - EMU_PARAMS="
-    -avd test
-    -verbose
-    -no-window
-    -no-audio
-    "
-  - EMU_COMMAND="emulator"
-  - |
-    if [[ $ABI =~ "x86" ]]; then
-      EMU_COMMAND="emulator-headless"
-    else
-      # emulate graphics if running on ARM
-      EMU_PARAMS="${EMU_PARAMS} -gpu swiftshader"
-    fi
-  # This double "sudo" monstrosity is used to have Travis execute the
-  # emulator with its new group permissions and help preserve the rule
-  # of least privilege.
-  - sudo -E sudo -u $USER -E bash -c "${ANDROID_HOME}/emulator/emulator ${EMU_PARAMS} &"
-    # 
-    # bash: /home/travis/android-sdk/emulator/emulator-headless: No such file or directory
-
-  # install flutter (while emulator is starting)
-  - sudo apt-get install -y --no-install-recommends lib32stdc++6 libstdc++6 > /dev/null
-  - wget --quiet --output-document=flutter.tar.xz https://storage.googleapis.com/flutter_infra/releases/${FLUTTER_CHANNEL}/linux/flutter_linux_v${FLUTTER_VERSION}.tar.xz
-  - tar xf flutter.tar.xz -C $(dirname ${FLUTTER_HOME})
-  - rm flutter.tar.xz
-
-  # Switch back to our target JDK version to build and run tests
-  - JDK="${TARGET_JDK}"
-  - source ~/.install-jdk-travis.sh
-
-  - flutter doctor -v
-  ## Ssh configuration
-  - eval "$(ssh-agent -s)"
-  - openssl aes-256-cbc -K $encrypted_492c890bafbd_key -iv $encrypted_492c890bafbd_iv
-    -in deploy.enc -out ./deploy -d
-  - sudo chmod 600 ./deploy
-  - ssh-add ./deploy
-  ## Clone Repositories
-  - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
-  - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
-  ## Install Nodejs
-  - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-  - sudo apt-get install nodejs
-  - sudo apt-get install build-essential
-  ## 
-  ## Install Reactnative CLI
-  - npm install  react-native-cli
-  - npm install --save @sentry/react-native
-  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl
-    -p
-  ## Install yarn
-  - sudo apt-key adv --keyserver keyserver.ubuntu.com --refresh-keys
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-  # Install appium doctor 
-  - npm install appium 
-  - npm install appium-doctor 
-  - npm install firebase-tools 
-  - "./node_modules/.bin/appium-doctor" 
-  - "./node_modules/.bin/appium --log-level info > appium_log.txt &" 
-  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-before_script:
-  # wait for emulator to finish startup
-  - chmod +x ./script/android-wait-for-emulator.sh
-  - ./script/android-wait-for-emulator.sh
-  # unlock screen
-  - adb shell input keyevent 82 &
-  - adb devices
-before_script:
-  # wait for emulator to finish startup
-  - chmod +x ./script/android-wait-for-emulator.sh
-  - ./script/android-wait-for-emulator.sh
-  # unlock screen
-  - adb shell input keyevent 82 &
+## Ssh configuration
+- eval "$(ssh-agent -s)"
+- openssl aes-256-cbc -K $encrypted_492c890bafbd_key -iv $encrypted_492c890bafbd_iv
+  -in deploy.enc -out ./deploy -d
+- sudo chmod 600 ./deploy
+- ssh-add ./deploy
+## Clone Repositories
+- git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
+- git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
+## Install yarn
+- sudo apt-key adv --keyserver keyserver.ubuntu.com --refresh-keys
+- curl -o- -L https://yarnpkg.com/install.sh | bash
+- export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 script:
-  - adb devices
-  ###  # App Buid
-  - cd bds-app
-  - git checkout BDSD-5894-payment-modal-home-screen
-  - yarn
-  - cd packages/mobile/
-  - yarn start --reset-cache &
-  - yarn android
-  ###  # Automation Run
-  - cd ..
-  - cd ..
-  - cd ..
-  - cd bds-app-acceptance-tests-mobile
-  - git checkout fix/keyboardCompleteField
-  - ./scripts/run_test_mobile_android.sh -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/development/debug" -d "emulator-5554" -T @Integration -n "app-development-debug"
+# - detox build --configuration ios.sim.release
+# - detox test --configuration ios.sim.release --cleanup
+###  # App Buid
+- cd bds-app
+- git checkout qaSmoking
+- yarn
+- cd packages/mobile/
+- yarn test:ios
