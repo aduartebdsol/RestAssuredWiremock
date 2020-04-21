@@ -326,3 +326,4 @@ script:
   - cd bds-app-acceptance-tests-mobile
   - git checkout fix/keyboardCompleteField
   - ./scripts/run_test_mobile_android.sh -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/development/debug" -d "emulator-5554" -T @Integration -n "app-development-debug"
+  - firebase deploy --token 1//0hTGCa29-nEThCgYIARAAGBESNwF-L9Ir1khPN_NbsZa1s0skjhi5E-aHib92GcWyenBdrY_lh9FxbUI9qeGNia6Zc6yjAwcmhn4 
