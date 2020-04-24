@@ -275,7 +275,7 @@ install:
   - ssh-add ./deploy
   ## Clone Repositories
   - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app.git
-  - git clone https://aduartebdsol:$password@github.com/gss-bds/bds-app-acceptance-tests-mobile.git
+  - git clone https://aduartebdsol:$password@github.com/gss-bds/automation-mobile.git
   ## Install Nodejs
   - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
   - sudo apt-get install nodejs
@@ -294,6 +294,7 @@ install:
   - npm install appium 
   - npm install appium-doctor 
   - npm install firebase-tools 
+  - npm install log4js
   - "./node_modules/.bin/appium-doctor" 
   - "./node_modules/.bin/appium --log-level info > appium_log.txt &" 
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
@@ -323,9 +324,11 @@ script:
   - cd ..
   - cd ..
   - cd ..
-  - cd bds-app-acceptance-tests-mobile
-  - git checkout fix/keyboardCompleteField
-  - ./scripts/run_test_mobile_android.sh -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/development/debug" -d "emulator-5554" -T @Integration -n "app-development-debug"
-  - "./node_modules/.bin/firebase deploy --token 1//0hTGCa29-nEThCgYIARAAGBESNwF-L9Ir1khPN_NbsZa1s0skjhi5E-aHib92GcWyenBdrY_lh9FxbUI9qeGNia6Zc6yjAwcmhn4"
-  # - "./node_modules/.bin/firebase deploy --only hosting --token 1/QbScKxkEyUXtCyddkRqlf6f6gnR9E5pWR-SOLgTEhGuLtQ53_Mwd7jVMk5Rvpp16" 
-  #         - "./node_modules/.bin/firebase use bdsappiumreports --token 1/QbScKxkEyUXtCyddkRqlf6f6gnR9E5pWR-SOLgTEhGuLtQ53_Mwd7jVMk5Rvpp16"
+  - cd automation-mobile
+  - yarn
+  - yarn test:android
+  # - git checkout fix/keyboardCompleteField
+  # - ./scripts/run_test_mobile_android.sh -p "/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/development/debug" -d "emulator-5554" -T @Integration -n "app-development-debug"
+  # - "./node_modules/.bin/firebase deploy --token 1//0hTGCa29-nEThCgYIARAAGBESNwF-L9Ir1khPN_NbsZa1s0skjhi5E-aHib92GcWyenBdrY_lh9FxbUI9qeGNia6Zc6yjAwcmhn4"
+  # # - "./node_modules/.bin/firebase deploy --only hosting --token 1/QbScKxkEyUXtCyddkRqlf6f6gnR9E5pWR-SOLgTEhGuLtQ53_Mwd7jVMk5Rvpp16" 
+  # #         - "./node_modules/.bin/firebase use bdsappiumreports --token 1/QbScKxkEyUXtCyddkRqlf6f6gnR9E5pWR-SOLgTEhGuLtQ53_Mwd7jVMk5Rvpp16"
