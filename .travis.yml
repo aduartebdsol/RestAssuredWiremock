@@ -325,6 +325,7 @@ script:
   - cd ..
   - cd ..
   - cd automation-mobile
+  - git checkout feature/PaymentTest
   - yarn
   - yarn test:android
   # - git checkout fix/keyboardCompleteField
