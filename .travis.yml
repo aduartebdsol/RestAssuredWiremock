@@ -1,6 +1,13 @@
 language: generic
 dist: bionic
-
+cache: 
+  directories:
+    - ~/.npm
+    - ~/bds-app
+    - ~/automation-mobile
+    - $HOME/bds-app
+    - $HOME/automation-mobile
+cache: yarn
 # specify global envs and jobs
 env:
   global:
@@ -315,7 +322,7 @@ script:
   - adb devices
   ###  # App Buid
   - cd bds-app
-  - git checkout BDSD-5894-payment-modal-home-screen
+  # - git checkout BDSD-5894-payment-modal-home-screen
   - yarn
   - cd packages/mobile/
   - yarn start --reset-cache &
