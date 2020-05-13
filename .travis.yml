@@ -2,7 +2,7 @@ language: generic
 dist: bionic
 cache: 
   directories:
-    - ~/.npm
+    - ~/.npm 
     - ~/bds-app
     - ~/automation-mobile
     - $HOME/bds-app
