@@ -1,6 +1,7 @@
 language: node_js
 dist: bionic
-
+node_js:
+  - 12.10.0
 # specify global envs and jobs
 env:
   global:
