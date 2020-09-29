@@ -293,7 +293,7 @@ script:
   - cd ..
   - cd ..
   - cd automation-mobile
-  - git checkout feature/PaymentTest
+  - git checkout pepiline3
   - yarn
-  - yarn test:android
+  - APK="/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/development/debug/app-development-debug.apk" ENV="./test/features/yellow/payments/ToDo/Backup/Login.feature" yarn test:android
   # - git checkout fix/keyboardCompleteField
