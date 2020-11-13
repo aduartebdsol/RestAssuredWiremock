@@ -283,17 +283,24 @@ before_script:
 script:
   - adb devices
   ###  # App Buid
-  - cd bds-app
-  - yarn
-  - cd packages/mobile/
-  - yarn start --reset-cache &
-  - yarn android
+  #- cd bds-app
+  #- yarn
+  #- cd packages/mobile/
+  #- yarn start --reset-cache &
+  #- yarn android
   ###  # Automation Run
-  - cd ..
-  - cd ..
-  - cd ..
+  #- cd ..
+  #- cd ..
+  #- cd ..
   - cd automation-mobile
   - git checkout pepiline3
   - yarn
-  - APK="/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/development/debug/app-development-debug.apk" ENV="./test/features/yellow/payments/ToDo/Backup/Login.feature" yarn test:android
+  - yarn getIntApp
+  - mkdir reports
+  - mkdir reports/screenshots
+  - ENV="./test/features/yellow/payments/ToDo/2.1_Doing/Login.feature" APK="app-release-int-4.apk" yarn test:android
+  - ENV=yellow  yarn updateReport
+  - yarn report
+  - yarn deployReport
+  #- APK="/home/travis/build/aduartebdsol/RestAssuredWiremock/bds-app/packages/mobile/android/app/build/outputs/apk/development/debug/app-development-debug.apk" ENV="./test/features/yellow/payments/ToDo/Backup/Login.feature" yarn test:android
   # - git checkout fix/keyboardCompleteField
